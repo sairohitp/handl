@@ -1,13 +1,26 @@
 import { GoogleGenAI, Type } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+
+let ai: GoogleGenAI | null = null;
+
+if (apiKey) {
+  ai = new GoogleGenAI({ apiKey: apiKey });
+} else {
+  console.warn("VITE_GEMINI_API_KEY is not set. AI features will be disabled.");
+}
 
 export const generateHandleSuggestions = async (startupName: string): Promise<string[]> => {
   if (!startupName.trim()) return [];
 
+  if (!ai) {
+    console.log("AI service is not initialized. Returning fallback suggestions.");
+    return ["try" + startupName, "get" + startupName, startupName + "app", startupName + "hq", startupName + "co"];
+  }
+
   try {
     const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
+      model: 'gemini-1.5-flash',
       contents: `You are a branding expert. Generate 5 creative, short, modern, and brandable social media handle variations for a startup named "${startupName}". 
       
       Strategies to use:

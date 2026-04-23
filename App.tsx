@@ -60,7 +60,7 @@ function App() {
     if (selectedTheme === 'light') {
       // Invert to make light, rotate hue back to make blue look blue
       body.style.filter = 'invert(1) hue-rotate(-180deg)';
-      body.style.backgroundColor = '#0f172a'; 
+      body.style.backgroundColor = '#FFFFFF'; 
     } else if (selectedTheme === 'dark') {
       body.style.filter = 'invert(0) hue-rotate(0deg)';
       body.style.backgroundColor = '#000000';

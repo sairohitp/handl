@@ -1,0 +1,16 @@
+/* Replace @tailwind base; etc. with: */
+@import "tailwindcss";
+
+body.theme-liquid {
+    background-color: #0f172a;
+}
+body.theme-midnight {
+    background-color: #000000;
+}
+body.theme-light {
+    /* This is the same as liquid; the filter will invert it */
+    background-color: #0f172a;
+}
+
+@tailwind components;
+@tailwind utilities;
